@@ -27,7 +27,7 @@ public class LocacaoService {
 		return locacao;
 	}
 
-	public static void main(String[] args) {
+	public static  void main(String[] args) {
 		//System.out.println("Funcionando.");
 		//Cenário
 		LocacaoService service = new LocacaoService();
@@ -46,9 +46,6 @@ public class LocacaoService {
 		System.out.println("Nome do filme: "+(locacao.getFilme().getTitulo()=="FIlme 01"));
 		//estoque do filme
 		System.out.println("Estoque do filme: "+(locacao.getFilme().getEstoque()==1));
-		
-		
-		
-		
+	
 	}
 }

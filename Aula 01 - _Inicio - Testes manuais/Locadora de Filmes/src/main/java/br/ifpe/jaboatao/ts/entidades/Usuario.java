@@ -1,5 +1,8 @@
 package br.ifpe.jaboatao.ts.entidades;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class Usuario {
 
 	private String nome;

@@ -1,20 +1,21 @@
-package br.ifpe.jaboatao.ts.utils;
+package br.edu.ifpe.jaboatao.ts.utils;
 
 import static java.util.Calendar.*;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class DataUtils {
+public class ManipulandoDatas {
 	
 
+
 	/**
-	 * Retorna uma nova data de acordo com a quantidade de dias passada por parametro, a partir de uma data espec�fica.
+	 * Retorna uma nova data de acordo com a quantidade de dias passada por parametro.
 	 * @param data a ser incrementado/decrementado
 	 * @param dias Quantidade de dias que ir� incrementado/decrementado a data
 	 * @return Data atualizada
 	 */
-	public static Date incrementarQntDias(int dias, Date data) {
+	public static Date novaDataComDiferencaDeDias(int dias, Date data) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(data);
 		calendar.add(DAY_OF_MONTH, dias);
@@ -25,15 +26,14 @@ public class DataUtils {
 	/**
 	 * Retorna uma nova data de acordo com a quantidade de dias passada por parametro.
 	 * @param dias Quantidade de dias a ser incrementado/decrementado
+	 * @return Data atualizada
 	 */
-	public static Date incrementarQntDias(int dias) {
-		return incrementarQntDias(dias, new Date());
+	public static Date novaDataComDiferencaDeDias(int dias) {
+		return novaDataComDiferencaDeDias(dias, new Date());
 	}	
 	
 	/**
-	 * Verifica se duas datas s�o iguais.. Leva em considera��o apenas dia, mes e ano
-	 * @param primeiraData
-	 * @param segundaData
+	 * Verifica se duas datas s�o iguais.. Lova em considera��o apenas dia, mes e ano
 	 */
 	public static boolean boDatasIguais(Date primeiraData, Date segundaData) {
 		//Primeira data
