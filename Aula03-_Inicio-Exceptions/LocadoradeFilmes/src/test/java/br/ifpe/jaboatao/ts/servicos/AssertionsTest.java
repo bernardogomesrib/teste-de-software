@@ -2,9 +2,6 @@ package br.ifpe.jaboatao.ts.servicos;
 
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +46,6 @@ public class AssertionsTest {
 	@Test
 	public void test04() {
 		Usuario u4 = null;
-		Usuario u5 = new Usuario("Usuario 01");
 		
 		
 		Assertions.assertTrue(u4 == null);

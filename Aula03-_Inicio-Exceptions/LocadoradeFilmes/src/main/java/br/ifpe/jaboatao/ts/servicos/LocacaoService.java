@@ -5,11 +5,18 @@ import java.util.Date;
 import br.ifpe.jaboatao.ts.entidades.Filme;
 import br.ifpe.jaboatao.ts.entidades.Locacao;
 import br.ifpe.jaboatao.ts.entidades.Usuario;
+import br.ifpe.jaboatao.ts.exceptions.LocacaoException;
 import br.ifpe.jaboatao.ts.utils.DataUtils;
 
 public class LocacaoService {
 	
-	public Locacao alugarFilme(Usuario usuario, Filme filme) {
+	public Locacao alugarFilme(Usuario usuario, Filme filme)throws LocacaoException {
+		if (filme == null) {
+			throw new LocacaoException("Filme vazio");
+		}
+		if(filme.getEstoque() == 0) {
+			throw new LocacaoException("Filme sem estoque");
+		}
 		Locacao locacao = new Locacao();
 		locacao.setFilme(filme);
 		locacao.setUsuario(usuario);
