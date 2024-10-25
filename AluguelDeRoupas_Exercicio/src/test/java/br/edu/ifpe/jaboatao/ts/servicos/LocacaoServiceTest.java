@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -82,6 +81,7 @@ public class LocacaoServiceTest {
         Locacao locacao = null;
         try {
             locacao = locacaoService.alugarRoupa(cliente, roupa);
+            Assertions.fail("Era para ter lançado uma exceção");
         } catch (LocacaoException e) {
             // Assert
             Assertions.assertEquals("Exceção:Usuário nulo.", e.getMessage());
@@ -124,14 +124,14 @@ public class LocacaoServiceTest {
     }
 
 
-    @Disabled
+    
     @Test
-    @DisplayName("Deve lançar uma exceção ao tentar alugar uma roupa com valor menor que 10 - metodo AssertThrows")
+    @DisplayName("Questão 6.c e 7 - Deve lançar uma exceção ao tentar alugar uma roupa com valor menor que 10 - metodo AssertThrows")
     public void testAlugarRoupaComValorMenorQue10() {
         // Arrange
         Cliente cliente = new Cliente();
         Roupa roupa = new Roupa("roupa 1", "M", 12, 9.9);
-        roupa.setValor(9.9);
+        
 
         // Act
         LocacaoException exception = Assertions.assertThrows(LocacaoException.class, () -> {
@@ -141,5 +141,27 @@ public class LocacaoServiceTest {
 
         // Assert
         Assertions.assertEquals("Verificar o valor da roupa", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Questão 6.c - Deve lançar uma exceção ao tentar alugar uma roupa com valor menor que 10 - metodo TryCatch")
+    public void testAlugarRoupaComValorMenorQue10TryCatch() {
+        // Arrange
+        Cliente cliente = new Cliente();
+        Roupa roupa = new Roupa("roupa 1", "M", 12, 9.9);
+
+
+        // Act
+        @SuppressWarnings("unused")
+        Locacao locacao = null;
+        try {
+            locacao = locacaoService.alugarRoupa(cliente, roupa);
+            Assertions.fail("Era para ter lançado uma exceção");
+        } catch (LocacaoException e) {
+            // Assert
+            Assertions.assertEquals("Verificar o valor da roupa", e.getMessage());
+        }
+
+
     }
 }
