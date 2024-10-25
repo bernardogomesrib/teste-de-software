@@ -24,7 +24,7 @@ public class LocacaoServiceTest {
     void teste2() {
         Assertions.assertEquals(locacao.getCliente(), cliente);
         Assertions.assertEquals(locacao.getRoupa(), roupa);
-        Assertions.assertEquals(locacao.getValorLocacao(),6.0);
+        Assertions.assertEquals(locacao.getValorLocacao(),69.0);
     }
     @Test
     void teste3(){
