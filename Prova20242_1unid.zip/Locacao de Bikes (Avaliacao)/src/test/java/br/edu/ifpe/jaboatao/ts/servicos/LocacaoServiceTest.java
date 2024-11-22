@@ -48,15 +48,17 @@ public class LocacaoServiceTest {
             Assertions.fail(e);
         }
     }
+    
     @Test
     @DisplayName("Questão 4.b - Bicicleta null com assert throw")
     public void testAlugarBicicletaBicicletaNull() {
 
         Exception exception = Assertions.assertThrows(BicicletaExcepton.class, () -> {
             locacaoService.alugarBicicleta(cliente, Arrays.asList(bicicleta, bicicleta2, bicicleta3, bicicleta4, bicicleta5));
-        });
+        },"Deveria ter lançado uma exceção");
         Assertions.assertEquals("Exceção: Bicicleta nula.", exception.getMessage());
     }
+
     @Test
     @DisplayName("Questão 4.c - Bicicleta null com try catch")
     public void testAlugarBicicletaClienteNull() {
@@ -72,6 +74,7 @@ public class LocacaoServiceTest {
         }
       
     }
+
     @Test
     @DisplayName("Questão 4.d - Bicicleta com valor menor que 5 com assert throw")
     public void testAlugarBicicletaBicicletaValorMenorQue5() {
@@ -82,6 +85,7 @@ public class LocacaoServiceTest {
         });
         Assertions.assertEquals("Exceção: Verificar valor da bicicleta.", exception.getMessage());
     }
+
     @Test
     @DisplayName("Questão 4.d - Bicicleta com valor menor que 5 com try catch")
     public void testAlugarBicicletaBicicletaValorMenorQue5TryCatch() {

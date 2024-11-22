@@ -27,7 +27,7 @@ public class LocacaoService {
 			if(bicicleta == null) {
 				throw new BicicletaExcepton("Exceção: Bicicleta nula.");
 			}
-			if(bicicleta.getValor() <= 5) {
+			if(bicicleta.getValor() < 5) {
 				throw new BicicletaExcepton("Exceção: Verificar valor da bicicleta.");
 			}
 			if (bicicleta.getEstoque() == 0) {
