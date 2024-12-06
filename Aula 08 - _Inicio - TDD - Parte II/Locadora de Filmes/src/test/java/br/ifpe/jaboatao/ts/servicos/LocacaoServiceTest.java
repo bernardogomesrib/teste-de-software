@@ -13,24 +13,25 @@ import br.ifpe.jaboatao.ts.entidades.Locacao;
 import br.ifpe.jaboatao.ts.entidades.Usuario;
 import br.ifpe.jaboatao.ts.exceptions.LocacaoException;
 
+@SuppressWarnings("unused")
 public class LocacaoServiceTest {
-//	private static int cont = 0;
+	// private static int cont = 0;
 	private LocacaoService service;
-	
+
 	@BeforeEach
 	public void setup() {
 		service = new LocacaoService();
-//		cont++;
-//		System.out.println(cont);
-		//incrementar
-		//imprimir na tela
+		// cont++;
+		// System.out.println(cont);
+		// incrementar
+		// imprimir na tela
 	}
-	
+
 	@Test
 	@DisplayName("Exception - Filme sem Estoque - Método try/catch")
 	public void teste02() {
 		// Cenário
-//		LocacaoService service = new LocacaoService();
+		// LocacaoService service = new LocacaoService();
 		Usuario usuario = new Usuario("João");
 		List<Filme> filmes = Arrays.asList(new Filme("Titulo", 0, 10.0));
 
@@ -48,7 +49,7 @@ public class LocacaoServiceTest {
 	@DisplayName("Exception - Filme sem Estoque - Método assertThrow()")
 	public void teste03() {
 		// Cenário
-//		LocacaoService service = new LocacaoService();
+		// LocacaoService service = new LocacaoService();
 		Usuario usuario = new Usuario("Pedro");
 		List<Filme> filmes = Arrays.asList(new Filme("Filme 01", 0, 22.0));
 
@@ -60,6 +61,7 @@ public class LocacaoServiceTest {
 		Assertions.assertEquals("Filme sem estoque.", e.getMessage());
 	}
 
+	@SuppressWarnings("unused")
 	@Test
 	@DisplayName("Exception - Filme nulo - Método try/catch")
 	public void teste04() {
@@ -77,51 +79,147 @@ public class LocacaoServiceTest {
 			Assertions.assertEquals("Filme nulo.", e.getMessage());
 		}
 	}
+
 	@Test
 	@DisplayName("Exception - Filme nulo - Meétodo assertThrow()")
 	public void teste05() {
-		//Cenário
-//		LocacaoService service = new LocacaoService();
+		// Cenário
+		// LocacaoService service = new LocacaoService();
 		Usuario usuario = new Usuario("Usuario");
 		List<Filme> filmes = null;
-		//Acao
+		// Acao
 		LocacaoException e = Assertions.assertThrows(LocacaoException.class, () -> {
 			service.alugarFilme(usuario, filmes);
 		}, "Filme deveria ser null.");
-		//Verificacao
+		// Verificacao
 		Assertions.assertEquals("Filme nulo.", e.getMessage());
 	}
-	
-	//Criar um teste com 3 filmes e verificar o valor da locação;
+
+	// Criar um teste com 3 filmes e verificar o valor da locação;
 	@Test
 	public void teste06() throws LocacaoException {
-		//Cenário
+		// Cenário
 		Usuario usuario = new Usuario("Maria");
-		List<Filme> filmes = 
-				Arrays.asList(
-						new Filme("Título1", 1, 10.0), 
-						new Filme("Título 2", 1, 10.0), 
-						new Filme("Título 3", 1, 10.0));
-		
-		//Ação
+		List<Filme> filmes = Arrays.asList(
+				new Filme("Título1", 1, 10.0),
+				new Filme("Título 2", 1, 10.0),
+				new Filme("Título 3", 1, 10.0));
+
+		// Ação
 		Locacao locacao = service.alugarFilme(usuario, filmes);
-		
-		//Verificação
+
+		// Verificação
 		Assertions.assertEquals(30.0, locacao.getValorLocacao());
 	}
-	
-	//Criar um teste com 2 filmes, sendo um deles nulo. Verificar o valor da locação.
+
+	// Criar um teste com 2 filmes, sendo um deles nulo. Verificar o valor da
+	// locação.
 	@Test
+	@DisplayName("sei lá")
 	public void teste07() throws LocacaoException {
-		//Cenário
+		// Cenário
 		Usuario usuario = new Usuario("Maria");
 		List<Filme> filmes = Arrays.asList(new Filme("Título", 1, 10.0), null);
-		
-		//Ação
+
+		// Ação
 		LocacaoException e = Assertions.assertThrows(LocacaoException.class, () -> {
 			service.alugarFilme(usuario, filmes);
 		}, "Filme deveria ser null.");
-		//Verificacao
+		// Verificacao
 		Assertions.assertEquals("Filme nulo.", e.getMessage());
+	}
+
+
+	@Test
+	@DisplayName("!Deve dar desconto de 25% ao 3º filme")
+	public void teste08() throws LocacaoException {
+		// Cenário
+		service.setPromocao(true);
+		Usuario usuario = new Usuario("Maria");
+		List<Filme> filmes = Arrays.asList(new Filme("Título", 1, 10.0),
+				new Filme("Título2", 1, 10.0),
+				new Filme("Título3", 1, 10.0));
+
+		// Ação
+		Locacao locacao = service.alugarFilme(usuario, filmes);
+		// Verificacao
+		// 10+10+7.5
+		Assertions.assertEquals(27.5, locacao.getValorLocacao());
+	}
+	@Test
+	@DisplayName("Deve dar desconto de 50% ao 4º filme")
+	public void teste09() throws LocacaoException {
+
+		service.setPromocao(true);
+		Usuario usuario = new Usuario("Maria");
+		List<Filme> filmes = Arrays.asList(new Filme("Título", 1, 10.0),
+		new Filme("Título2", 1, 10.0),
+		new Filme("Título2", 1, 10.0),
+		new Filme("Título3", 1, 10.0));
+		
+		// Ação
+		Locacao locacao = service.alugarFilme(usuario, filmes);
+		// Verificacao
+		// 10+10+7.5+5
+		Assertions.assertEquals(32.5, locacao.getValorLocacao());
+	}
+
+	@Test
+	@DisplayName("Deve dar desconto de 75% ao 5º filme")
+	public void teste10() throws LocacaoException {
+
+		service.setPromocao(true);
+		Usuario usuario = new Usuario("Maria");
+		List<Filme> filmes = Arrays.asList(new Filme("Título", 1, 10.0),
+				new Filme("Título2", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0));
+
+		// Ação
+		Locacao locacao = service.alugarFilme(usuario, filmes);
+		// Verificacao
+		// 10+10+7.5+5+2.5
+		Assertions.assertEquals(35, locacao.getValorLocacao());
+	}
+
+	@Test
+	@DisplayName("Deve dar desconto de 100% ao 6º filme")
+	public void teste11() throws LocacaoException {
+
+		service.setPromocao(true);
+		Usuario usuario = new Usuario("Maria");
+		List<Filme> filmes = Arrays.asList(new Filme("Título", 1, 10.0),
+				new Filme("Título2", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0));
+
+		// Ação
+		Locacao locacao = service.alugarFilme(usuario, filmes);
+		// Verificacao
+		// 10+10+7.5+5+2.5+0
+		Assertions.assertEquals(35, locacao.getValorLocacao());
+	}
+	@Test
+	@DisplayName("Deve dar desconto de 0% ao 7º filme")
+	public void teste12() throws LocacaoException {
+
+		service.setPromocao(true);
+		Usuario usuario = new Usuario("Maria");
+		List<Filme> filmes = Arrays.asList(new Filme("Título", 1, 10.0),
+				new Filme("Título2", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0),
+				new Filme("Título3", 1, 10.0));
+
+		// Ação
+		Locacao locacao = service.alugarFilme(usuario, filmes);
+		// Verificacao
+		// 10+10+7.5+5+2.5+0+10
+		Assertions.assertEquals(45, locacao.getValorLocacao());
 	}
 }
