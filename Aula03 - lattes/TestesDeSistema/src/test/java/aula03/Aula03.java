@@ -62,9 +62,10 @@ public class Aula03 {
                 
             
         });
+
         if(driver.getTitle().contains("Currículo do Sistema de Currículos Lattes")) {
             System.out.println("Titulo da página: " + driver.getTitle());
-            WebElement el  =driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div/div[1]/ul/li[2]/span[2]"));
+            WebElement el = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div/div[1]/ul/li[2]/span[2]"));
             assertEquals("3865101019636416", el.getText());            
         }
         assertTrue(achou);
